@@ -14,7 +14,7 @@ public class Bibliothekverwaltung {
            Frame mainFrame = new Frame();
            Pane mainPane = new Pane();
            
-           mainTab tap1 = new mainTab("Tap 1");
+           mainTab tap1 = new mainTab("Tap 1", mainFrame.getSize());
            
            mainPane.add(tap1.getTitle(), tap1);
            
