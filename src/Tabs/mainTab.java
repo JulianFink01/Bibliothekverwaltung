@@ -5,9 +5,14 @@
  */
 package Tabs;
 
+import Frames.Pane;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -15,17 +20,24 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
 
 /**
  *
  * @author Julian Fink
  */
-public class mainTab extends JPanel implements Tap {
+public class mainTab extends JPanel implements Tap, MouseListener {
 
     private String title;
     private JPanel panelLeft;
     private JPanel panelTop;
     private JPanel panelBottom;
+    private Pane parent;
+    JButton neuerDatensatz;
+    JButton suchFenster;
+    JButton reset;
+    JButton delete;
+    JButton leave;
 
     private Dimension dim;
 
@@ -33,8 +45,9 @@ public class mainTab extends JPanel implements Tap {
     private Color pigeon = new Color(114, 133, 165);
     private Color maya = new Color(115, 194, 251);
 
-    public mainTab(String title, Dimension dim) {
+    public mainTab(Pane parent, String title, Dimension dim) {
         this.dim = dim;
+        this.parent = parent;
         setTitle(title);
         init();
         initBackground();
@@ -53,26 +66,30 @@ public class mainTab extends JPanel implements Tap {
         Icon searchpng = scaleImage("src/Images/search.png", 80, 80);
         Icon deletepng = scaleImage("src/Images/delete.png", 80, 80);
 
-        JButton neuerDatensatz = new JButton(neueDatenpng);
-        JButton suchFenster = new JButton(searchpng);
-        JButton reset = new JButton(resetpng);
-        JButton delete = new JButton(deletepng);
-        JButton leave = new JButton(leafepng);
+        neuerDatensatz = new JButton(neueDatenpng);
+        suchFenster = new JButton(searchpng);
+        reset = new JButton(resetpng);
+        delete = new JButton(deletepng);
+        leave = new JButton(leafepng);
 
         int buttonAbstand = 20;
-        prepareButton(neuerDatensatz,panel, 10, dim.height/10*1, 80, 80);
-        prepareButton(suchFenster,panel, 10, dim.height/10*2+buttonAbstand, 80, 80);
-        prepareButton(reset,panel, 10, dim.height/10*3+2*buttonAbstand, 80, 80);
-        prepareButton(delete,panel, 10, dim.height/10*4+3*buttonAbstand, 80, 80);
-        prepareButton(leave,panel, 10, dim.height/10*5+4*buttonAbstand, 80, 80);
-       
+        prepareButton(neuerDatensatz, panel, 10, dim.height / 10 * 1, 80, 80);
+        prepareButton(suchFenster, panel, 10, dim.height / 10 * 2 + buttonAbstand, 80, 80);
+        prepareButton(reset, panel, 10, dim.height / 10 * 3 + 2 * buttonAbstand, 80, 80);
+        prepareButton(delete, panel, 10, dim.height / 10 * 4 + 3 * buttonAbstand, 80, 80);
+        prepareButton(leave, panel, 10, dim.height / 10 * 6 + 5 * buttonAbstand, 80, 80);
 
     }
 
-    private void prepareButton(JButton button,JPanel parent, int x, int y, int width, int height) {
+    private void prepareButton(JButton button, JPanel parent, int x, int y, int width, int height) {
         button.setBounds(x, y, width, height);
         button.setHorizontalAlignment(SwingConstants.CENTER);
         button.setVerticalAlignment(SwingConstants.CENTER);
+        button.setOpaque(false);
+        button.setContentAreaFilled(true);
+        LineBorder b = new LineBorder(pigeon);
+        button.setBorder(b);
+        button.addMouseListener(this);
         parent.add(button);
     }
 
@@ -87,7 +104,6 @@ public class mainTab extends JPanel implements Tap {
 
     private void initBackground() {
 
-        System.out.println(dim.width + " " + dim.height);
         panelLeft = new JPanel();
         panelTop = new JPanel();
         panelBottom = new JPanel();
@@ -121,6 +137,31 @@ public class mainTab extends JPanel implements Tap {
     @Override
     public String getTitle() {
         return this.title;
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        if (e.getSource() == neuerDatensatz) {
+            neuerEintrag n = new neuerEintrag(parent, "Neuer Eintrag", dim);
+            parent.add(n.getTitle(),n);
+            parent.setSelectedComponent(n);
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
     }
 
 }
