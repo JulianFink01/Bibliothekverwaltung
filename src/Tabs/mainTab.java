@@ -25,6 +25,7 @@ import javax.swing.border.LineBorder;
 /**
  *
  * @author Julian Fink
+ * 
  */
 public class mainTab extends JPanel implements Tap, MouseListener {
 
@@ -36,7 +37,7 @@ public class mainTab extends JPanel implements Tap, MouseListener {
     JButton neuerDatensatz;
     JButton suchFenster;
     JButton reset;
-    JButton delete;
+    JButton user;
     JButton leave;
 
     private Dimension dim;
@@ -64,19 +65,19 @@ public class mainTab extends JPanel implements Tap, MouseListener {
         Icon leafepng = scaleImage("src/Images/leave.png", 80, 80);
         Icon resetpng = scaleImage("src/Images/reset.png", 80, 80);
         Icon searchpng = scaleImage("src/Images/search.png", 80, 80);
-        Icon deletepng = scaleImage("src/Images/delete.png", 80, 80);
+        Icon userpng = scaleImage("src/Images/user.png", 80, 80);
 
         neuerDatensatz = new JButton(neueDatenpng);
         suchFenster = new JButton(searchpng);
         reset = new JButton(resetpng);
-        delete = new JButton(deletepng);
+        user = new JButton(userpng);
         leave = new JButton(leafepng);
 
         int buttonAbstand = 20;
         prepareButton(neuerDatensatz, panel, 10, dim.height / 10 * 1, 80, 80);
-        prepareButton(suchFenster, panel, 10, dim.height / 10 * 2 + buttonAbstand, 80, 80);
-        prepareButton(reset, panel, 10, dim.height / 10 * 3 + 2 * buttonAbstand, 80, 80);
-        prepareButton(delete, panel, 10, dim.height / 10 * 4 + 3 * buttonAbstand, 80, 80);
+        prepareButton(user, panel, 10, dim.height / 10 * 2 + buttonAbstand, 80, 80);
+        prepareButton(suchFenster, panel, 10, dim.height / 10 * 3 + 2 * buttonAbstand, 80, 80);
+        prepareButton(reset, panel, 10, dim.height / 10 * 4 + 3 * buttonAbstand, 80, 80);
         prepareButton(leave, panel, 10, dim.height / 10 * 6 + 5 * buttonAbstand, 80, 80);
 
     }
@@ -145,6 +146,16 @@ public class mainTab extends JPanel implements Tap, MouseListener {
             neuerEintrag n = new neuerEintrag(parent, "Neuer Eintrag", dim);
             parent.add(n.getTitle(),n);
             parent.setSelectedComponent(n);
+        }
+        if (e.getSource() == user) {
+            neuerSchueler s = new neuerSchueler(parent, "Neuer Schüler", dim);
+            parent.add(s.getTitle(),s);
+            parent.setSelectedComponent(s);
+        }
+        if (e.getSource() == suchFenster) {
+            Suchen s = new Suchen(parent, "Suche Einträge", dim);
+            parent.add(s.getTitle(),s);
+            parent.setSelectedComponent(s);
         }
     }
 
