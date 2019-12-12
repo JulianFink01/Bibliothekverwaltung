@@ -73,11 +73,17 @@ public class mainTab extends JPanel implements Tap, MouseListener {
         user = new JButton(userpng);
         leave = new JButton(leafepng);
 
+        JLabel text = new JLabel("<html><body><a style='text-align: left; color: white; width: 100%; font-size: 25px; color: white; padding-left: 20px;'>Bibliothekverwaltung von Julian Fink für Datenbanken im Schuljahr 2019<br><br><a style='font-size: 16px'>- Erster Knopf Links: Zum einfügen eines neuen Buches<br>\n- Zweiter Knopf Links: Zum einfügen eines neuen Schülers<br>\n- Dritter Knopf Links: Zum Suchen und zum ausleihen / zurückgeben von Büchern<a/></a></body></html>");
+       panelBottom.setLayout(null);    
+        text.setBounds(50, 50, 900,300);
+        panelBottom.add(text);
+    
+        
         int buttonAbstand = 20;
         prepareButton(neuerDatensatz, panel, 10, dim.height / 10 * 1, 80, 80);
         prepareButton(user, panel, 10, dim.height / 10 * 2 + buttonAbstand, 80, 80);
         prepareButton(suchFenster, panel, 10, dim.height / 10 * 3 + 2 * buttonAbstand, 80, 80);
-        prepareButton(reset, panel, 10, dim.height / 10 * 4 + 3 * buttonAbstand, 80, 80);
+       // prepareButton(reset, panel, 10, dim.height / 10 * 4 + 3 * buttonAbstand, 80, 80);
         prepareButton(leave, panel, 10, dim.height / 10 * 6 + 5 * buttonAbstand, 80, 80);
 
     }
@@ -156,6 +162,9 @@ public class mainTab extends JPanel implements Tap, MouseListener {
             Suchen s = new Suchen(parent, "Suche Einträge", dim);
             parent.add(s.getTitle(),s);
             parent.setSelectedComponent(s);
+        }
+        if(e.getSource() == leave){
+            System.exit(0);
         }
     }
 
