@@ -24,7 +24,7 @@ public class DBConnector {
         try {
             Class.forName("org.postgresql.Driver");//"org.postgresql.Driver"
             if (CONNECTION == null) {
-                CONNECTION = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/bibliothekverwaltung", "postgres", "Fungog04");//"jdbc:postgresql://127.0.0.1:5432/Weine" - postgres - "Fungog04"
+                CONNECTION = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/bibliothekverwaltung", "postgres", "Fungo04");//"jdbc:postgresql://127.0.0.1:5432/Weine" - postgres 
             }
             connected = true;
             return true;
