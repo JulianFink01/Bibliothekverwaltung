@@ -21,10 +21,4 @@ create table ausleihen(
 	primary key(SID, BID)
 );
 
-create table rueckgabe(
-	SID int not null REFERENCES schueler(SID),
-	BID int not null REFERENCES buch(BID),
-	Datum date,
-	primary key(SID, BID)
-)
 
